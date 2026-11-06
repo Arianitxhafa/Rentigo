@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rreth nesh | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="about">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a href="/">Ballina</a><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a class="active" href="/about">Rreth nesh</a><a href="/contact">Kontakt</a>
+      </nav>
+    </header>
+    <main>
+      <section class="story-section">
+        <div class="story-image" aria-hidden="true"></div>
+        <div class="story-content">
+          <p class="eyebrow">Rreth nesh</p>
+          <h1>Udhetime te thjeshta, nga rezervimi deri te dorezimi</h1>
+          <p>Rentigo kombinon flote te perzgjedhur, cmime te qarta dhe koordinim te shpejte per kliente individuale dhe kompani.</p>
+          <div class="story-points">
+            <span><i data-lucide="badge-check"></i> Flote e verifikuar</span>
+            <span><i data-lucide="calendar-check"></i> Rezervime online</span>
+            <span><i data-lucide="messages-square"></i> Kontakte klientesh</span>
+          </div>
+        </div>
+      </section>
+      <section class="section testimonials-section">
+        <div class="section-heading"><div><p class="eyebrow">Klientet</p><h2>Eksperience e qarte dhe e shpejte</h2></div></div>
+        <div class="testimonial-grid">
+          <article><p>Rezervimi online ishte i thjeshte dhe makina ishte gati kur mberrita ne Mitrovice.</p><strong>Arta Krasniqi</strong><span>Udhetim biznesi</span></article>
+          <article><p>Flota kishte opsione per familje dhe procesi i marrjes zgjati pak minuta.</p><strong>Elion Meta</strong><span>Pushime ne jug</span></article>
+          <article><p>Ekipi na konfirmoi shpejt dhe ndryshimi i dates u trajtua pa vonesa.</p><strong>Mira Dervishi</strong><span>Rezervim weekend</span></article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand footer-logo" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a><p>Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.</p><div class="footer-badges"><span>24/7 asistence</span><span>Flote e kontrolluar</span></div></div><nav class="footer-column" aria-label="Faqe"><strong>Faqe</strong><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a></nav><nav class="footer-column" aria-label="Llogaria"><strong>Llogaria</strong><a href="/login">Hyr</a><a href="/signup">Regjistrohu</a><a href="/account">Llogaria ime</a><a href="/contact">Suport</a></nav><div class="footer-column"><strong>Kontakt</strong><span><i data-lucide="phone"></i> +355 69 000 1111</span><span><i data-lucide="mail"></i> hello@rentigo.local</span><span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span></div></div><div class="footer-bottom"><span>© 2026 Rentigo. Te gjitha te drejtat e rezervuara.</span><span>Siguri, transparence dhe rezervime te shpejta.</span></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

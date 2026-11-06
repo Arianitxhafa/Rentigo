@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rentigo | Makina me qira ne Kosove</title>
+    <meta name="description" content="Rentigo ofron makina me qira, rezervime online dhe asistence ne Kosove." />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Rentigo">
+        <span class="brand-mark"><i data-lucide="car-front"></i></span>
+        <span>
+          <strong>Rentigo</strong>
+          <small>Makina me qira</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a class="active" href="/">Ballina</a>
+        <a href="/fleet">Flota</a>
+        <a href="/booking">Rezervim</a>
+        <a href="/services">Sherbime</a>
+        <a href="/about">Rreth nesh</a>
+        <a href="/contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Rentigo">
+        <div class="hero-content">
+          <p class="eyebrow">Rezervim online ne pak hapa</p>
+          <h1>Rentigo</h1>
+          <p class="hero-copy">
+            Flote moderne per udhetime biznesi, pushime familjare dhe levizje ditore ne qytetet kryesore.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="/fleet">
+              <i data-lucide="search"></i>
+              <span>Shiko makinat</span>
+            </a>
+            <a class="secondary-button glass" href="/contact">
+              <i data-lucide="phone"></i>
+              <span>Kontakto</span>
+            </a>
+          </div>
+        </div>
+
+        <form class="hero-search" id="heroSearchForm" aria-label="Kerko makine">
+          <label>
+            Kategoria
+            <select id="heroCategory" name="category">
+              <option value="all">Te gjitha</option>
+            </select>
+          </label>
+          <label>
+            Marrja
+            <input id="heroPickupDate" name="pickupDate" type="date" />
+          </label>
+          <label>
+            Kthimi
+            <input id="heroReturnDate" name="returnDate" type="date" />
+          </label>
+          <button class="primary-button" type="submit">
+            <i data-lucide="arrow-right"></i>
+            <span>Kerko</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="trust-strip" aria-label="Avantazhet">
+        <div>
+          <strong id="publicTotalCars">0+</strong>
+          <span>makina ne flote</span>
+        </div>
+        <div>
+          <strong>24/7</strong>
+          <span>asistence</span>
+        </div>
+        <div>
+          <strong id="publicCityCount">14</strong>
+          <span>qytete nga te cilat mund te besh rezervime</span>
+        </div>
+        <div>
+          <strong id="publicAvailableCars">0</strong>
+          <span>gati per rezervim</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Te zgjedhura</p>
+            <h2>Makina gati per rruge</h2>
+          </div>
+          <a class="secondary-button" href="/fleet">
+            <i data-lucide="arrow-right"></i>
+            <span>Te gjitha</span>
+          </a>
+        </div>
+        <div class="car-grid" id="featuredCarGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Sherbime</p>
+            <h2>Per cdo lloj udhetimi</h2>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service-item">
+            <span><i data-lucide="briefcase-business"></i></span>
+            <h3>Biznes</h3>
+            <p>Makina komode, dokumentacion i rregullt dhe fatura per kompanite.</p>
+          </article>
+          <article class="service-item">
+            <span><i data-lucide="plane"></i></span>
+            <h3>Aeroport</h3>
+            <p>Marrje dhe dorezim ne pikat kryesore, me koordinim te shpejte para udhetimit.</p>
+          </article>
+          <article class="service-item">
+            <span><i data-lucide="map"></i></span>
+            <h3>Pushime</h3>
+            <p>SUV, city cars dhe makina familjare per rruget bregdetare ose qytetet malore.</p>
+          </article>
+          <article class="service-item">
+            <span><i data-lucide="shield-check"></i></span>
+            <h3>Siguri</h3>
+            <p>Flote e kontrolluar, asistence rrugore dhe rezervime me historik.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <div>
+          <p class="eyebrow">Gati per nisje</p>
+          <h2>Rezervo makinen tende sot</h2>
+          <p>Zgjidh floten, vendos datat dhe dergo rezervimin online.</p>
+        </div>
+        <a class="primary-button" href="/booking">
+          <i data-lucide="calendar-plus"></i>
+          <span>Fillo rezervimin</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand footer-logo" href="/">
+            <span class="brand-mark"><i data-lucide="car-front"></i></span>
+            <span><strong>Rentigo</strong><small>Makina me qira</small></span>
+          </a>
+          <p>Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.</p>
+          <div class="footer-badges"><span>24/7 asistence</span><span>Flote e kontrolluar</span></div>
+        </div>
+        <nav class="footer-column" aria-label="Faqe">
+          <strong>Faqe</strong>
+          <a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a>
+        </nav>
+        <nav class="footer-column" aria-label="Llogaria">
+          <strong>Llogaria</strong>
+          <a href="/login">Hyr</a><a href="/signup">Regjistrohu</a><a href="/account">Llogaria ime</a><a href="/contact">Suport</a>
+        </nav>
+        <div class="footer-column">
+          <strong>Kontakt</strong>
+          <span><i data-lucide="phone"></i> +355 69 000 1111</span>
+          <span><i data-lucide="mail"></i> hello@rentigo.local</span>
+          <span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Rentigo. Te gjitha te drejtat e rezervuara.</span><span>Siguri, transparence dhe rezervime te shpejta.</span></div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

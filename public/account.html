@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Llogaria | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="account">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Llogaria jote</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a href="/">Ballina</a><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a><a href="/contact">Kontakt</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-hero booking-hero">
+        <p class="eyebrow">Llogaria</p>
+        <h1>Mire se erdhe, <span id="accountName">klient</span></h1>
+        <p>Shiko profilin dhe rezervimet qe ke krijuar duke qene i loguar.</p>
+      </section>
+
+      <section class="section account-layout">
+        <aside class="account-card">
+          <span class="account-avatar"><i data-lucide="user"></i></span>
+          <div>
+            <h2 id="accountFullName">Klient</h2>
+            <p id="accountEmail">email@example.com</p>
+            <p id="accountPhone">+355...</p>
+          </div>
+          <button class="secondary-button" id="userLogoutButton" type="button">
+            <i data-lucide="log-out"></i>
+            <span>Dil nga llogaria</span>
+          </button>
+        </aside>
+
+        <div>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Rezervimet</p>
+              <h2>Historiku yt</h2>
+            </div>
+          </div>
+          <div class="booking-list" id="accountBookingList" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand footer-logo" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a><p>Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.</p><div class="footer-badges"><span>24/7 asistence</span><span>Flote e kontrolluar</span></div></div><nav class="footer-column" aria-label="Faqe"><strong>Faqe</strong><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a></nav><nav class="footer-column" aria-label="Llogaria"><strong>Llogaria</strong><a href="/login">Hyr</a><a href="/signup">Regjistrohu</a><a href="/account">Llogaria ime</a><a href="/contact">Suport</a></nav><div class="footer-column"><strong>Kontakt</strong><span><i data-lucide="phone"></i> +355 69 000 1111</span><span><i data-lucide="mail"></i> hello@rentigo.local</span><span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span></div></div><div class="footer-bottom"><span>© 2026 Rentigo. Te gjitha te drejtat e rezervuara.</span><span>Siguri, transparence dhe rezervime te shpejta.</span></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

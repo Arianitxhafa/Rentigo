@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: rentigo
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/public-stats
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: rentigo-data
+      mountPath: /var/data
+      sizeGB: 1

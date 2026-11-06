@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rezervim | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="booking">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a href="/">Ballina</a><a href="/fleet">Flota</a><a class="active" href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a><a href="/contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero booking-hero">
+        <p class="eyebrow">Rezervim</p>
+        <h1>Perfundo rezervimin online</h1>
+        <p>Zgjidh makinen, vendos datat dhe dergo kerkesen.</p>
+      </section>
+
+      <section class="section booking-band">
+        <div class="booking-copy">
+          <p class="eyebrow">Te dhenat</p>
+          <h2>Rezervo ne pak hapa</h2>
+          <p>Zgjidh nje makine nga lista ose hap rezervimin direkt nga faqja e flotes.</p>
+          <a class="secondary-button" href="/fleet"><i data-lucide="car"></i><span>Shiko floten</span></a>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+          <input id="selectedCarId" name="carId" type="hidden" />
+          <label>Makina<select id="bookingCarSelect"><option value="">Zgjidh makine</option></select></label>
+          <div class="selected-car" id="selectedCarBox">
+            <strong>Zgjidh nje makine</strong>
+            <span>Rezervimi lidhet me makinen e zgjedhur.</span>
+          </div>
+          <div class="form-grid">
+            <label>Klienti<input name="customerName" type="text" placeholder="Emri dhe mbiemri" required /></label>
+            <label>Email<input name="email" type="email" placeholder="klienti@email.com" required /></label>
+            <label>Telefon<input name="phone" type="tel" placeholder="+355..." required /></label>
+            <label>Lokacioni
+              <select id="pickupLocation" name="pickupLocation" required>
+                <option value="">Zgjidh qytetin</option>
+              </select>
+            </label>
+            <label>Marrja<input id="pickupDate" name="pickupDate" type="date" required /></label>
+            <label>Kthimi<input id="returnDate" name="returnDate" type="date" required /></label>
+          </div>
+          <div class="booking-total" id="bookingTotalBox" aria-live="polite">
+            <span>
+              <small>Totali</small>
+              <strong id="bookingTotal">0 EUR</strong>
+            </span>
+            <span id="bookingTotalDetails">Zgjidh makinen dhe datat.</span>
+          </div>
+          <button class="primary-button" type="submit"><i data-lucide="check"></i><span>Rezervo tani</span></button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand footer-logo" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a><p>Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.</p><div class="footer-badges"><span>24/7 asistence</span><span>Flote e kontrolluar</span></div></div><nav class="footer-column" aria-label="Faqe"><strong>Faqe</strong><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a></nav><nav class="footer-column" aria-label="Llogaria"><strong>Llogaria</strong><a href="/login">Hyr</a><a href="/signup">Regjistrohu</a><a href="/account">Llogaria ime</a><a href="/contact">Suport</a></nav><div class="footer-column"><strong>Kontakt</strong><span><i data-lucide="phone"></i> +355 69 000 1111</span><span><i data-lucide="mail"></i> hello@rentigo.local</span><span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span></div></div><div class="footer-bottom"><span>© 2026 Rentigo. Te gjitha te drejtat e rezervuara.</span><span>Siguri, transparence dhe rezervime te shpejta.</span></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
