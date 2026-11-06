@@ -31,6 +31,8 @@ const passwordFile = path.join(dataDir, "admin-password.txt");
 const adminSessionCookieName = "rentigo_admin_session";
 const userSessionCookieName = "rentigo_user_session";
 const sessionTtlMs = 8 * 60 * 60 * 1000;
+// Behind HTTPS in production, session cookies must only travel over secure connections.
+const secureCookie = process.env.NODE_ENV === "production" ? "; Secure" : "";
 const adminSessions = new Map();
 const userSessions = new Map();
 
@@ -137,7 +139,7 @@ function createAdminSession(res) {
   adminSessions.set(token, expiresAt);
   res.setHeader(
     "Set-Cookie",
-    `${adminSessionCookieName}=${encodeURIComponent(token)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${Math.floor(
+    `${adminSessionCookieName}=${encodeURIComponent(token)}; HttpOnly; SameSite=Lax; Path=/${secureCookie}; Max-Age=${Math.floor(
       sessionTtlMs / 1000
     )}`
   );
@@ -148,7 +150,7 @@ function clearAdminSession(req, res) {
   if (token) {
     adminSessions.delete(token);
   }
-  res.setHeader("Set-Cookie", `${adminSessionCookieName}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`);
+  res.setHeader("Set-Cookie", `${adminSessionCookieName}=; HttpOnly; SameSite=Lax; Path=/${secureCookie}; Max-Age=0`);
 }
 
 function isAdminAuthenticated(req) {
@@ -182,7 +184,7 @@ function createUserSession(res, userId) {
   userSessions.set(token, { userId, expiresAt });
   res.setHeader(
     "Set-Cookie",
-    `${userSessionCookieName}=${encodeURIComponent(token)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${Math.floor(
+    `${userSessionCookieName}=${encodeURIComponent(token)}; HttpOnly; SameSite=Lax; Path=/${secureCookie}; Max-Age=${Math.floor(
       sessionTtlMs / 1000
     )}`
   );
@@ -193,7 +195,7 @@ function clearUserSession(req, res) {
   if (token) {
     userSessions.delete(token);
   }
-  res.setHeader("Set-Cookie", `${userSessionCookieName}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`);
+  res.setHeader("Set-Cookie", `${userSessionCookieName}=; HttpOnly; SameSite=Lax; Path=/${secureCookie}; Max-Age=0`);
 }
 
 function getCurrentUser(req) {
