@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sherbime | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="services">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a href="/">Ballina</a><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a class="active" href="/services">Sherbime</a><a href="/about">Rreth nesh</a><a href="/contact">Kontakt</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-hero services-hero"><p class="eyebrow">Sherbime</p><h1>Zgjidhje per cdo udhetim</h1><p>Makina per biznes, pushime, aeroport dhe udhetime ditore.</p></section>
+      <section class="section">
+        <div class="service-grid">
+          <article class="service-item"><span><i data-lucide="briefcase-business"></i></span><h3>Biznes</h3><p>Makina komode, kontrata te qarta dhe fatura per kompani.</p></article>
+          <article class="service-item"><span><i data-lucide="plane"></i></span><h3>Aeroport</h3><p>Marrje dhe dorezim ne pikat kryesore, me koordinim para udhetimit.</p></article>
+          <article class="service-item"><span><i data-lucide="map"></i></span><h3>Pushime</h3><p>SUV, city cars dhe makina familjare per bregdet ose udhetime malore.</p></article>
+          <article class="service-item"><span><i data-lucide="shield-check"></i></span><h3>Siguri</h3><p>Flote e kontrolluar, asistence rrugore dhe historik rezervimesh.</p></article>
+        </div>
+      </section>
+      <section class="faq-section">
+        <div><p class="eyebrow">Procesi</p><h2>Si funksionon</h2></div>
+        <div class="faq-list">
+          <details open><summary>1. Zgjidh makinen</summary><p>Filtro floten sipas qytetit, kategorise dhe buxhetit.</p></details>
+          <details><summary>2. Dergo rezervimin</summary><p>Vendos datat, lokacionin dhe te dhenat e kontaktit.</p></details>
+          <details><summary>3. Merr konfirmimin</summary><p>Ekipi konfirmon disponueshmerine dhe dorezimin.</p></details>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand footer-logo" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a><p>Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.</p><div class="footer-badges"><span>24/7 asistence</span><span>Flote e kontrolluar</span></div></div><nav class="footer-column" aria-label="Faqe"><strong>Faqe</strong><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/services">Sherbime</a><a href="/about">Rreth nesh</a></nav><nav class="footer-column" aria-label="Llogaria"><strong>Llogaria</strong><a href="/login">Hyr</a><a href="/signup">Regjistrohu</a><a href="/account">Llogaria ime</a><a href="/contact">Suport</a></nav><div class="footer-column"><strong>Kontakt</strong><span><i data-lucide="phone"></i> +355 69 000 1111</span><span><i data-lucide="mail"></i> hello@rentigo.local</span><span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span></div></div><div class="footer-bottom"><span>© 2026 Rentigo. Te gjitha te drejtat e rezervuara.</span><span>Siguri, transparence dhe rezervime te shpejta.</span></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

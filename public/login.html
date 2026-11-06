@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="login">
+    <main class="auth-page">
+      <section class="auth-card user-auth-card">
+        <a class="brand auth-brand" href="/" aria-label="Rentigo">
+          <span class="brand-mark"><i data-lucide="car-front"></i></span>
+          <span>
+            <strong>Rentigo</strong>
+            <small>Llogaria jote</small>
+          </span>
+        </a>
+
+        <div>
+          <p class="eyebrow">Perdorues</p>
+          <h1>Hyr ne llogari</h1>
+          <p class="auth-copy">Ruaj te dhenat dhe ndiq rezervimet e tua me Rentigo.</p>
+        </div>
+
+        <form class="login-form" id="userLoginForm">
+          <label>
+            Email
+            <input name="email" type="email" placeholder="email@example.com" autocomplete="email" required />
+          </label>
+          <label>
+            Password
+            <div class="password-field">
+              <input name="password" type="password" placeholder="Password" autocomplete="current-password" required />
+              <button type="button" class="icon-button password-toggle" aria-label="Shfaq fjalëkalimin">
+                <i data-lucide="eye"></i>
+              </button>
+            </div>
+          </label>
+          <button class="primary-button" type="submit">
+            <i data-lucide="log-in"></i>
+            <span>Hyr</span>
+          </button>
+        </form>
+
+        <div class="auth-switch">
+          <span>Nuk ke llogari?</span>
+          <a href="/signup">Krijo llogari</a>
+        </div>
+      </section>
+
+      <section class="auth-card admin-auth-card">
+        <a class="brand auth-brand" href="/" aria-label="Rentigo">
+          <span class="brand-mark"><i data-lucide="shield-check"></i></span>
+          <span>
+            <strong>Rentigo</strong>
+            <small>Admin privat</small>
+          </span>
+        </a>
+
+        <div>
+          <p class="eyebrow">Vetem admin</p>
+          <h1>Hyr ne panel</h1>
+          <p class="auth-copy">Kjo zone kerkon password-in e administratorit.</p>
+        </div>
+
+        <form class="login-form" id="adminLoginForm">
+          <label>
+            Password admin
+            <div class="password-field">
+              <input name="password" type="password" placeholder="Shkruaj password-in" autocomplete="current-password" required />
+              <button type="button" class="icon-button password-toggle" aria-label="Shfaq fjalëkalimin admin">
+                <i data-lucide="eye"></i>
+              </button>
+            </div>
+          </label>
+          <button class="primary-button" type="submit">
+            <i data-lucide="lock-keyhole"></i>
+            <span>Hyr si admin</span>
+          </button>
+        </form>
+
+        <a class="secondary-button" href="/login">
+          <i data-lucide="user"></i>
+          <span>Login klienti</span>
+        </a>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

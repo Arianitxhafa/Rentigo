@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark"><i data-lucide="car-front"></i></span><span><strong>Rentigo</strong><small>Makina me qira</small></span></a>
+      <button class="menu-toggle" type="button" aria-label="Hap menune" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <nav class="site-nav" aria-label="Navigimi kryesor">
+        <a href="/">Ballina</a><a class="nav-admin active" href="/admin"><i data-lucide="layout-dashboard"></i><span>Admin</span></a><button class="nav-admin nav-logout" id="logoutButton" type="button"><i data-lucide="log-out"></i><span>Dil</span></button>
+      </nav>
+    </header>
+    <main>
+      <section class="admin-panel active" id="adminPanel" aria-label="Panel administrimi">
+        <div class="admin-heading"><div><p class="eyebrow">Admin</p><h1>Paneli i menaxhimit</h1></div></div>
+        <div class="metrics-grid" aria-label="Statistika">
+          <article class="metric"><span class="metric-icon available"><i data-lucide="car"></i></span><span><small>Makina aktive</small><strong id="totalCars">0</strong></span></article>
+          <article class="metric"><span class="metric-icon confirmed"><i data-lucide="badge-check"></i></span><span><small>Te disponueshme</small><strong id="availableCars">0</strong></span></article>
+          <article class="metric"><span class="metric-icon calendar"><i data-lucide="calendar-days"></i></span><span><small>Rezervime aktive</small><strong id="activeBookings">0</strong></span></article>
+          <article class="metric"><span class="metric-icon revenue"><i data-lucide="banknote"></i></span><span><small>Te ardhura</small><strong id="revenue">0 EUR</strong></span></article>
+        </div>
+        <div class="admin-tabs" role="tablist" aria-label="Admin tabs">
+          <button class="admin-tab active" type="button" data-admin-view="carsAdmin">Flota</button>
+          <button class="admin-tab" type="button" data-admin-view="bookingsAdmin">Rezervime</button>
+          <button class="admin-tab" type="button" data-admin-view="leadsAdmin">Mesazhet</button>
+          <button class="admin-tab" type="button" data-admin-view="addCarAdmin">Shto makine</button>
+        </div>
+        <div class="admin-view active" id="carsAdmin">
+          <div class="admin-view-heading"><h3>Te gjitha makinat</h3><button class="secondary-button" id="refreshCars" type="button"><i data-lucide="refresh-cw"></i><span>Rifresko</span></button></div>
+          <div class="admin-car-list" id="adminCarList" aria-live="polite"></div>
+        </div>
+        <div class="admin-view" id="bookingsAdmin">
+          <div class="admin-view-heading"><h3>Rezervimet</h3><button class="secondary-button" id="refreshBookings" type="button"><i data-lucide="refresh-cw"></i><span>Rifresko</span></button></div>
+          <div class="booking-list" id="bookingList" aria-live="polite"></div>
+        </div>
+        <div class="admin-view" id="leadsAdmin">
+          <div class="admin-view-heading"><h3>Mesazhet</h3><span id="leadCount" class="pill">0 mesazhe</span></div>
+          <div class="lead-list" id="leadList" aria-live="polite"></div>
+        </div>
+        <div class="admin-view" id="addCarAdmin">
+          <form class="car-form" id="carForm">
+            <label>Marka<input name="brand" type="text" placeholder="Audi" required /></label>
+            <label>Modeli<input name="model" type="text" placeholder="A4" required /></label>
+            <label>Viti<input name="year" type="number" min="1990" max="2035" value="2024" required /></label>
+            <label>Kategoria<input name="category" type="text" placeholder="SUV" required /></label>
+            <label>Transmisioni<select name="transmission" required><option value="Automatic">Automatic</option><option value="Manual">Manual</option></select></label>
+            <label>Karburanti<select name="fuel" required><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option><option value="Hybrid">Hybrid</option><option value="Electric">Electric</option></select></label>
+            <label>Vende<input name="seats" type="number" min="2" max="12" value="5" required /></label>
+            <label>Cmimi / dite<input name="pricePerDay" type="number" min="10" value="55" required /></label>
+            <input name="location" type="hidden" value="Mitrovice" />
+            <label>Statusi<select name="status" required><option value="available">E disponueshme</option><option value="booked">E zene</option><option value="maintenance">Servis</option></select></label>
+            <label class="wide-field">Foto URL<input name="imageUrl" type="url" value="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=80" required /></label>
+            <button class="primary-button wide-field" type="submit"><i data-lucide="save"></i><span>Ruaj makinen</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <dialog class="edit-dialog" id="editCarDialog" aria-labelledby="editCarTitle">
+      <form class="car-form edit-car-form" id="editCarForm">
+        <input id="editCarId" name="id" type="hidden" />
+        <div class="edit-dialog-heading wide-field">
+          <div>
+            <p class="eyebrow">Edito</p>
+            <h2 id="editCarTitle">Perditeso makinen</h2>
+          </div>
+          <button class="icon-button" id="closeEditCar" type="button" title="Mbyll" aria-label="Mbyll"><i data-lucide="x"></i></button>
+        </div>
+        <label>Marka<input name="brand" type="text" required /></label>
+        <label>Modeli<input name="model" type="text" required /></label>
+        <label>Viti<input name="year" type="number" min="1990" max="2035" required /></label>
+        <label>Kategoria<input name="category" type="text" required /></label>
+        <label>Transmisioni<select name="transmission" required><option value="Automatic">Automatic</option><option value="Manual">Manual</option></select></label>
+        <label>Karburanti<select name="fuel" required><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option><option value="Hybrid">Hybrid</option><option value="Electric">Electric</option></select></label>
+        <label>Vende<input name="seats" type="number" min="2" max="12" required /></label>
+        <label>Cmimi / dite<input name="pricePerDay" type="number" min="10" required /></label>
+        <label>Statusi<select name="status" required><option value="available">E disponueshme</option><option value="booked">E zene</option><option value="maintenance">Servis</option></select></label>
+        <label class="wide-field">Foto URL<input name="imageUrl" type="url" required /></label>
+        <div class="edit-dialog-actions wide-field">
+          <button class="secondary-button" id="cancelEditCar" type="button"><i data-lucide="x"></i><span>Anulo</span></button>
+          <button class="primary-button" type="submit"><i data-lucide="save"></i><span>Ruaj ndryshimet</span></button>
+        </div>
+      </form>
+    </dialog>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand footer-logo" href="/"><span class="brand-mark"><i data-lucide="shield-check"></i></span><span><strong>Rentigo Admin</strong><small>Panel privat</small></span></a><p>Menaxhim flote, rezervime, mesazhe dhe statistika operative.</p><div class="footer-badges"><span>Akses privat</span><span>Session i mbrojtur</span></div></div><nav class="footer-column" aria-label="Admin"><strong>Admin</strong><a href="/admin">Paneli</a><button class="footer-link-button" id="footerLogoutButton" type="button">Dil nga admin</button></nav><nav class="footer-column" aria-label="Faqe publike"><strong>Website</strong><a href="/">Home</a><a href="/fleet">Flota</a><a href="/booking">Rezervim</a><a href="/contact">Kontakt</a></nav><div class="footer-column"><strong>Kontakt</strong><span><i data-lucide="mail"></i> hello@rentigo.local</span><span><i data-lucide="map-pin"></i> Mitrovice, Kosove</span></div></div><div class="footer-bottom"><span>© 2026 Rentigo Admin.</span><span>Paneli eshte i disponueshem vetem per administratorin.</span></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

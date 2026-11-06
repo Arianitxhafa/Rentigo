@@ -1,0 +1,24 @@
+{
+  "name": "rentigo",
+  "version": "1.0.0",
+  "description": "Full stack car rental web application with Node.js, SQLite, and a responsive frontend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "car-rental",
+    "sqlite",
+    "full-stack"
+  ],
+  "author": "Arianit Xhafa",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "nodemailer": "^8.0.7"
+  }
+}

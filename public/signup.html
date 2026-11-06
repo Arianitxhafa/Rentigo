@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up | Rentigo</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-page="signup">
+    <main class="auth-page">
+      <section class="auth-card">
+        <a class="brand auth-brand" href="/" aria-label="Rentigo">
+          <span class="brand-mark"><i data-lucide="car-front"></i></span>
+          <span>
+            <strong>Rentigo</strong>
+            <small>Llogari e re</small>
+          </span>
+        </a>
+
+        <div>
+          <p class="eyebrow">Regjistrim</p>
+          <h1>Krijo llogari</h1>
+          <p class="auth-copy">Krijo profilin tend per rezervime me te shpejta.</p>
+        </div>
+
+        <form class="login-form" id="userSignupForm">
+          <label>
+            Emri
+            <input name="fullName" type="text" placeholder="Emri dhe mbiemri" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" placeholder="email@example.com" autocomplete="email" required />
+          </label>
+          <label>
+            Telefon
+            <input name="phone" type="tel" placeholder="+355..." autocomplete="tel" required />
+          </label>
+          <label>
+            Password
+            <div class="password-field">
+              <input name="password" type="password" placeholder="Minimum 6 karaktere" autocomplete="new-password" required />
+              <button type="button" class="icon-button password-toggle" aria-label="Shfaq fjalëkalimin">
+                <i data-lucide="eye"></i>
+              </button>
+            </div>
+          </label>
+          <button class="primary-button" type="submit">
+            <i data-lucide="user-plus"></i>
+            <span>Krijo llogari</span>
+          </button>
+        </form>
+
+        <div class="auth-switch">
+          <span>Ke llogari?</span>
+          <a href="/login">Hyr ketu</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
