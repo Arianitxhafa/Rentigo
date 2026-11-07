@@ -2,9 +2,9 @@
 
 **A full-stack car rental platform built from first principles — no frameworks.**
 
-Rentigo is a complete car rental website for Kosovo: customers browse the fleet, create an account and book a car online, while the owner manages cars, bookings and customer leads from a private admin dashboard. The backend is a hand-written Node.js HTTP server with a SQLite database, and the frontend is plain HTML, CSS and JavaScript.
+Rentigo is a complete car rental website for Kosovo: customers browse the fleet, create an account and book a car online, while the owner manages cars, bookings and customer leads from a private admin dashboard. The backend is a hand-written Node.js request handler on serverless PostgreSQL (Neon), deployed on Vercel, and the frontend is plain HTML, CSS and JavaScript.
 
-> **Live demo:** _coming soon_
+> **Live demo:** _moving to Vercel — link coming soon_
 
 ---
 
@@ -25,8 +25,10 @@ Rentigo is a complete car rental website for Kosovo: customers browse the fleet,
 - Cars are released automatically when a booking expires
 
 **Under the hood**
-- REST-style JSON API written with Node's built-in `http` module
-- SQLite via Node's built-in `node:sqlite` — the database is created and seeded automatically
+- REST-style JSON API written by hand — the same handler runs as a local Node server and as a Vercel function
+- PostgreSQL on Neon via the serverless HTTP driver — tables are created and seeded automatically on first use
+- Sessions stored in the database (only a SHA-256 hash of each token), so logins work across serverless instances
+- Booking a car claims it atomically in one statement, so two people can't book the same car at once
 - Passwords hashed with `scrypt` and random salts; constant-time comparisons
 - HttpOnly session cookies (`Secure` in production) with expiry
 - Path-traversal-safe static file server and request size limits
@@ -37,62 +39,49 @@ Rentigo is a complete car rental website for Kosovo: customers browse the fleet,
 | Layer | Technology |
 | --- | --- |
 | Frontend | HTML5, CSS3, vanilla JavaScript, Lucide icons |
-| Backend | Node.js (`node:http`), REST API |
-| Database | SQLite (`node:sqlite`) |
-| Hosting | Render |
+| Backend | Node.js, REST API (no framework) |
+| Database | PostgreSQL (Neon serverless) |
+| Hosting | Vercel (static pages on the CDN, API as a serverless function) |
 
 ## 🚀 Run locally
 
-Requires **Node.js 22.13 or newer**.
+Requires **Node.js 22.9 or newer** and a free [Neon](https://neon.tech) Postgres database.
 
 ```bash
 npm install
+cp .env.example .env     # add your DATABASE_URL (and optionally ADMIN_PASSWORD)
 npm start
 ```
 
-Open <http://localhost:3000>. The database is created at `data/rentigo.db` and seeded with cars and sample bookings.
+Open <http://localhost:3000>. On first use the tables are created and seeded with cars and sample bookings.
 
-### Admin access
-
-Set your own admin password before starting:
-
-```bash
-# macOS / Linux
-ADMIN_PASSWORD="your-password" npm start
-
-# Windows PowerShell
-$env:ADMIN_PASSWORD="your-password"; npm start
-```
-
-If `ADMIN_PASSWORD` is not set, a random password is generated and saved to `data/admin-password.txt` (ignored by Git). Log in at <http://localhost:3000/login?admin=1>.
+If `ADMIN_PASSWORD` is not set locally, a random password is generated and saved to `data/admin-password.txt` (ignored by Git). Log in at <http://localhost:3000/login?admin=1>.
 
 ### Environment variables
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
-| `PORT` | HTTP port | `3000` |
-| `ADMIN_PASSWORD` | Admin panel password | generated |
-| `DATA_DIR` | Folder for the SQLite database | `./data` |
-| `NODE_ENV` | Set to `production` to enable secure cookies | — |
+| `DATABASE_URL` | Neon / Postgres connection string | — (required) |
+| `ADMIN_PASSWORD` | Admin panel password | generated locally; required on Vercel |
+| `PORT` | HTTP port for the local server | `3000` |
 
-## ☁️ Deploy on Render (free)
+## ☁️ Deploy on Vercel (free)
 
-1. Push this repository to GitHub.
-2. In Render choose **New → Blueprint** and select the repository — `render.yaml` configures everything.
-3. Enter a strong `ADMIN_PASSWORD` when prompted and deploy.
-
-The free plan has no persistent disk, so the demo database is recreated with sample data whenever the service restarts. For a production setup, switch to a paid plan and mount a disk at `DATA_DIR`.
+1. Import the GitHub repository in Vercel (framework preset: **Other**).
+2. Add `DATABASE_URL` and `ADMIN_PASSWORD` as environment variables.
+3. Deploy. `vercel.json` serves `public/` from the CDN and rewrites `/api/*` to the serverless function in `api/index.js`.
 
 ## 📁 Project structure
 
 ```
 rentigo/
-├── server.js        # HTTP server, routing, auth and API
+├── api/index.js     # Vercel function entry point
+├── server.js        # Local server (same handler) + hourly booking release
 ├── src/
-│   └── database.js  # SQLite schema, seed data and queries
-├── public/          # HTML pages, styles.css and app.js
-├── data/            # SQLite database (created at runtime)
-└── render.yaml      # Render deployment blueprint
+│   ├── app.js       # Routing, auth, validation and the JSON API
+│   └── database.js  # Postgres schema, seed data, queries and sessions
+├── public/          # HTML pages, styles.css and app.js (served by the CDN)
+└── vercel.json      # Rewrites, clean URLs and headers
 ```
 
 ## 👤 Author
