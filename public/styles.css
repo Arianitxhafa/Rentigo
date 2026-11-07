@@ -612,15 +612,38 @@ label {
   padding-right: 48px;
 }
 
+/* Centred with insets + auto margins, not a transform: the shared .icon-button
+   hover lift (translateY) would otherwise override the centring and make it jump. */
 .password-field .password-toggle {
   position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
+  top: 0;
+  bottom: 0;
+  right: 6px;
+  margin: auto 0;
   width: 36px;
   height: 36px;
+  border: 0;
   border-radius: 8px;
   padding: 0;
+  background: transparent;
+  color: var(--muted, #64748b);
+  box-shadow: none;
+  transform: none;
+  transition: color 180ms var(--ease), background 180ms var(--ease);
+}
+
+.password-field .password-toggle:hover,
+.password-field .password-toggle:focus-visible {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--ink);
+}
+
+.password-field .password-toggle:focus-visible {
+  outline: 2px solid rgba(15, 118, 110, 0.45);
+  outline-offset: 1px;
 }
 
 input,

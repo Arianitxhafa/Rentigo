@@ -1140,15 +1140,12 @@ function bindEvents() {
 
       const isHidden = input.type === "password";
       input.type = isHidden ? "text" : "password";
-      const icon = button.querySelector("i");
-      if (icon) {
-        icon.setAttribute("data-lucide", isHidden ? "eye-off" : "eye");
-      }
-      button.setAttribute(
-        "aria-label",
-        isHidden ? "Fsheh fjalëkalimin" : "Shfaq fjalëkalimin"
-      );
+      // Lucide replaces <i> with an <svg> on first render, so swap the markup instead of editing the <i>.
+      button.innerHTML = `<i data-lucide="${isHidden ? "eye-off" : "eye"}"></i>`;
+      button.setAttribute("aria-label", isHidden ? "Fsheh fjalëkalimin" : "Shfaq fjalëkalimin");
+      button.setAttribute("aria-pressed", String(isHidden));
       refreshIcons();
+      input.focus();
     });
   });
   els.userSignupForm?.addEventListener("submit", submitUserSignup);
