@@ -92,12 +92,17 @@ function formatMoney(value) {
   return `${Number(value || 0).toLocaleString("en-US")} EUR`;
 }
 
+const MONTHS = {
+  sq: ["jan", "shk", "mar", "pri", "maj", "qer", "korr", "gush", "sht", "tet", "nën", "dhj"],
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+};
+const uiLang = () => (document.documentElement.lang === "en" ? "en" : "sq");
+const t = (text) => (window.RentigoI18n ? window.RentigoI18n.t(text) : text);
+
+// Month names by hand: not every browser ships Albanian date data.
 function formatDate(value) {
-  return new Intl.DateTimeFormat("sq-AL", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  }).format(new Date(`${value}T00:00:00`));
+  const [year, month, day] = String(value).slice(0, 10).split("-");
+  return `${day} ${MONTHS[uiLang()][Number(month) - 1]} ${year}`;
 }
 
 function toInputDate(date) {
@@ -576,7 +581,7 @@ async function deleteCar(carId) {
   const car = state.cars.find((item) => String(item.id) === String(carId));
   const label = car ? `${car.brand} ${car.model}` : "kete makine";
 
-  if (!window.confirm(`A je i sigurt qe do ta fshish ${label}? Rezervimet e lidhura me kete makine do hiqen gjithashtu.`)) {
+  if (!window.confirm(t(`A je i sigurt qe do ta fshish ${label}? Rezervimet e lidhura me kete makine do hiqen gjithashtu.`))) {
     return;
   }
 
@@ -691,7 +696,7 @@ function updateBookingTotal() {
   setText(els.bookingTotal, formatMoney(total));
   setText(
     els.bookingTotalDetails,
-    `${days} ${days === 1 ? "dite" : "dite"} × ${formatMoney(car.price_per_day)} / dite`
+    `${days} dite × ${formatMoney(car.price_per_day)} / dite`
   );
   els.bookingTotalBox?.classList.add("has-total");
 }
@@ -864,7 +869,7 @@ function renderInquiries() {
         </span>
         <span>
           <strong>${escapeHtml(lead.topic)}</strong>
-          <small>${new Date(`${lead.created_at}Z`).toLocaleString("sq-AL")}</small>
+          <small>${formatDate(lead.created_at)} ${String(lead.created_at).slice(11, 16)}</small>
         </span>
         <span>
           <strong>${escapeHtml(lead.message)}</strong>

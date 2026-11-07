@@ -16,6 +16,8 @@ Rentigo is a complete car rental website for Kosovo: customers browse the fleet,
 - Sign up, log in and an account page with personal booking history
 - Online booking form with pickup locations across Kosovo
 - Contact form that stores customer inquiries
+- **Albanian & English** — every page, the content rendered from the API and the server's messages; picked from the browser on the first visit and switchable (SQ / EN) in the header. `public/i18n.js` translates by the Albanian text, including content added later, so the pages and `app.js` stay plain
+- **Light, dark or system theme** — a toggle in the header, applied before the first paint and remembered per browser
 
 **For the admin**
 - Password-protected admin panel

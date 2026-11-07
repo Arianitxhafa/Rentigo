@@ -716,7 +716,9 @@ async function handler(req, res) {
     }
 
     if ((url.pathname === "/login" || url.pathname === "/login.html" || url.pathname === "/signup" || url.pathname === "/signup.html") && !isAdminLoginMode && (await getCurrentUser(req))) {
-      redirect(res, "/account");
+      // Same rule as the page: only same-site paths are honoured after login.
+      const next = url.searchParams.get("next") || "";
+      redirect(res, next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/\\") && !/[\u0000-\u001f]/.test(next) ? next : "/account");
       return;
     }
 
