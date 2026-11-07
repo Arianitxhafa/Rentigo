@@ -2,10 +2,9 @@
   "name": "rentigo",
   "version": "1.0.0",
   "description": "Full stack car rental web application with Node.js, PostgreSQL (Neon) and a responsive frontend.",
-  "main": "server.js",
   "scripts": {
-    "start": "node --env-file-if-exists=.env server.js",
-    "dev": "node --env-file-if-exists=.env --watch server.js"
+    "start": "node --env-file-if-exists=.env scripts/dev-server.js",
+    "dev": "node --env-file-if-exists=.env --watch scripts/dev-server.js"
   },
   "keywords": [
     "car-rental",

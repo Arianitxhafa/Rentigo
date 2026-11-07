@@ -1,12 +1,30 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
   "outputDirectory": "public",
   "cleanUrls": true,
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    }
+  ],
   "redirects": [
-    { "source": "/admin-login", "destination": "/login?admin=1&next=%2Fadmin", "permanent": false }
+    {
+      "source": "/admin-login",
+      "destination": "/login?admin=1&next=%2Fadmin",
+      "permanent": false
+    }
   ],
   "headers": [
-    { "source": "/(.*)", "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
   ]
 }

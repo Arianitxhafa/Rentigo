@@ -1,4 +1,4 @@
-// Request handler shared by the local server (server.js) and the Vercel function (api/index.js).
+// Request handler shared by the local server (scripts/dev-server.js) and the Vercel function (api/index.js).
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");

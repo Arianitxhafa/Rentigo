@@ -67,7 +67,7 @@ If `ADMIN_PASSWORD` is not set locally, a random password is generated and saved
 
 ## ☁️ Deploy on Vercel (free)
 
-1. Import the GitHub repository in Vercel (framework preset: **Other**).
+1. Import the GitHub repository in Vercel (framework preset: **Other** — `vercel.json` pins it).
 2. Add `DATABASE_URL` and `ADMIN_PASSWORD` as environment variables.
 3. Deploy. `vercel.json` serves `public/` from the CDN and rewrites `/api/*` to the serverless function in `api/index.js`.
 
@@ -76,9 +76,10 @@ If `ADMIN_PASSWORD` is not set locally, a random password is generated and saved
 ```
 rentigo/
 ├── api/index.js     # Vercel function entry point
-├── server.js        # Local server (same handler) + hourly booking release
+├── scripts/
+│   └── dev-server.js  # Local server (same handler) + hourly booking release
 ├── src/
-│   ├── app.js       # Routing, auth, validation and the JSON API
+│   ├── handler.js   # Routing, auth, validation and the JSON API
 │   └── database.js  # Postgres schema, seed data, queries and sessions
 ├── public/          # HTML pages, styles.css and app.js (served by the CDN)
 └── vercel.json      # Rewrites, clean URLs and headers

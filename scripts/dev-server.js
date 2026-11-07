@@ -1,7 +1,7 @@
-// Local / long-running server. On Vercel the same handler runs as a function (api/index.js).
+// Local server for development. On Vercel the same handler runs as a function (api/index.js).
 const http = require("node:http");
-const { handler } = require("./src/app");
-const { releaseExpiredBookings } = require("./src/database");
+const { handler } = require("../src/handler");
+const { releaseExpiredBookings } = require("../src/database");
 
 const PORT = Number(process.env.PORT || 3000);
 
