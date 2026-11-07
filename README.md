@@ -4,7 +4,7 @@
 
 Rentigo is a complete car rental website for Kosovo: customers browse the fleet, create an account and book a car online, while the owner manages cars, bookings and customer leads from a private admin dashboard. The backend is a hand-written Node.js request handler on serverless PostgreSQL (Neon), deployed on Vercel, and the frontend is plain HTML, CSS and JavaScript.
 
-> **Live demo:** _moving to Vercel — link coming soon_
+> **Live demo:** **[rentigo-rose.vercel.app](https://rentigo-rose.vercel.app)** · admin panel at `/login?admin=1`
 
 ---
 
