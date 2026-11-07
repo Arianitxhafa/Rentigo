@@ -973,7 +973,7 @@ async function submitAdminLogin(event) {
       method: "POST",
       body: JSON.stringify(formToObject(els.adminLoginForm))
     });
-    window.location.href = params.get("next") || "/admin";
+    window.location.href = safeNext("/admin");
   } catch (error) {
     notify(error.message, "error");
   }
@@ -987,7 +987,7 @@ async function submitUserLogin(event) {
       method: "POST",
       body: JSON.stringify(formToObject(els.userLoginForm))
     });
-    window.location.href = params.get("next") || "/account";
+    window.location.href = safeNext("/account");
   } catch (error) {
     notify(error.message, "error");
   }
@@ -1001,7 +1001,7 @@ async function submitUserSignup(event) {
       method: "POST",
       body: JSON.stringify(formToObject(els.userSignupForm))
     });
-    window.location.href = params.get("next") || "/account";
+    window.location.href = safeNext("/account");
   } catch (error) {
     notify(error.message, "error");
   }
@@ -1164,10 +1164,32 @@ function bindEvents() {
   });
 }
 
+// Only same-site paths are allowed after login, so ?next= can't send people to another website.
+function safeNext(fallback) {
+  const next = params.get("next") || "";
+  return next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/\\") ? next : fallback;
+}
+
+// Static hosting has no server-side redirect, so signed-in visitors are sent past the login/signup pages here.
+async function redirectSignedInVisitors() {
+  const adminMode = page === "login" && params.get("admin") === "1";
+  if ((page !== "login" && page !== "signup") || adminMode) return false;
+  try {
+    const data = await fetch("/api/user-me").then((response) => response.json());
+    if (!data.authenticated) return false;
+    window.location.replace(safeNext("/account"));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function init() {
   if (page === "login" && params.get("admin") === "1") {
     document.body.classList.add("admin-auth-mode");
   }
+
+  if (await redirectSignedInVisitors()) return;
 
   if (page === "booking") {
     state.filters.status = "available";
