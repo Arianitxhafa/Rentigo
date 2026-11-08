@@ -525,7 +525,7 @@ body.is-scrolled .site-header {
 .page-hero.booking-hero {
   background:
     linear-gradient(90deg, rgba(9, 14, 16, 0.84), rgba(9, 14, 16, 0.32)),
-    url("https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1900&q=82") center / cover;
+    url("https://images.unsplash.com/photo-1681113163879-b36638289c54?auto=format&fit=crop&w=1900&q=82") center / cover;
 }
 
 .page-hero.services-hero {
@@ -1607,9 +1607,9 @@ details p {
   display: grid;
   place-items: center;
   min-height: 230px;
-  border: 1px dashed #b8c4be;
+  border: 1px dashed var(--line);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--surface-strong);
   color: var(--muted);
   text-align: center;
   padding: 22px;
@@ -2089,5 +2089,158 @@ body.admin-auth-mode .admin-auth-card {
 
   .booking-total > span:last-child {
     text-align: left;
+  }
+}
+
+/* ===== Responsive polish ===================================================== */
+
+/* Hero photos always cover the whole hero (a % width left gaps that tiled on tall phones). */
+.hero,
+.page-hero {
+  background-repeat: no-repeat;
+  background-size: auto, cover;
+}
+
+@keyframes heroDrift {
+  from {
+    background-position: center, 50% 50%;
+  }
+  to {
+    background-position: center, 56% 44%;
+  }
+}
+
+/* Three fields + the button. */
+.hero-search {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+}
+
+/* Footer links get a comfortable tap height. */
+.site-footer a,
+.footer-link-button {
+  min-height: 32px;
+}
+
+@media (max-width: 1180px) {
+  .hero-search {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-search .primary-button {
+    grid-column: 1 / -1;
+  }
+}
+
+/* The full menu needs ~1100px; below that it folds into the menu button. */
+@media (max-width: 1100px) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-grid;
+  }
+
+  .site-nav {
+    display: none;
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+    order: 3;
+  }
+
+  .site-header.nav-open .site-nav {
+    display: flex;
+  }
+
+  .site-nav a,
+  .nav-admin,
+  .nav-cta,
+  .user-nav-group {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .user-nav-group {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .site-header .prefs {
+    order: 0;
+    margin-left: auto;
+  }
+
+  .site-header .menu-toggle {
+    order: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-search {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-strip div {
+    min-height: 0;
+    padding: 18px 16px;
+  }
+}
+
+/* Small phones: keep logo, switches and menu button on one row. */
+@media (max-width: 400px) {
+  .site-header {
+    gap: 8px;
+    padding-inline: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .prefs {
+    gap: 4px;
+  }
+
+  .prefs button {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 6px;
+  }
+
+  .prefs .prefs-lang button {
+    height: 26px;
+    min-width: 28px;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Admin on phones: stats in a 2x2 grid, tabs on one line (they scroll sideways if needed). */
+.admin-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .metric {
+    gap: 10px;
+    padding: 14px;
   }
 }

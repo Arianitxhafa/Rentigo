@@ -79,12 +79,12 @@ const SCHEMA = [
   `WITH seeded AS (
     INSERT INTO cars (brand, model, year, category, transmission, fuel, seats, price_per_day, location, image_url, status)
     SELECT * FROM (VALUES
-      ('Toyota', 'Corolla', 2023, 'Economy', 'Automatic', 'Hybrid', 5, 42, 'Mitrovice', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=80', 'available'),
-      ('Volkswagen', 'Golf', 2022, 'Compact', 'Manual', 'Diesel', 5, 38, 'Mitrovice', 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80', 'available'),
-      ('BMW', 'X3', 2024, 'SUV', 'Automatic', 'Petrol', 5, 88, 'Mitrovice', 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80', 'available'),
-      ('Mercedes-Benz', 'C-Class', 2023, 'Luxury', 'Automatic', 'Petrol', 5, 96, 'Mitrovice', 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80', 'available'),
-      ('Hyundai', 'Tucson', 2023, 'SUV', 'Automatic', 'Hybrid', 5, 72, 'Mitrovice', 'https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=1200&q=80', 'maintenance'),
-      ('Fiat', '500', 2022, 'City', 'Automatic', 'Petrol', 4, 31, 'Mitrovice', 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=80', 'available')
+      ('Toyota', 'Corolla', 2023, 'Economy', 'Automatic', 'Hybrid', 5, 42, 'Mitrovice', 'https://images.unsplash.com/photo-1638618164682-12b986ec2a75?auto=format&fit=crop&w=1200&q=80', 'available'),
+      ('Volkswagen', 'Golf', 2022, 'Compact', 'Manual', 'Diesel', 5, 38, 'Mitrovice', 'https://images.unsplash.com/photo-1760688964516-1012e0ece2a8?auto=format&fit=crop&w=1200&q=80', 'available'),
+      ('BMW', 'X3', 2024, 'SUV', 'Automatic', 'Petrol', 5, 88, 'Mitrovice', 'https://images.unsplash.com/photo-1677961019377-d45643fde74f?auto=format&fit=crop&w=1200&q=80', 'available'),
+      ('Mercedes-Benz', 'C-Class', 2023, 'Luxury', 'Automatic', 'Petrol', 5, 96, 'Mitrovice', 'https://images.unsplash.com/photo-1618373444305-3a77b7719a59?auto=format&fit=crop&w=1200&q=80', 'available'),
+      ('Hyundai', 'Tucson', 2023, 'SUV', 'Automatic', 'Hybrid', 5, 72, 'Mitrovice', 'https://images.unsplash.com/photo-1575090536203-2a6193126514?auto=format&fit=crop&w=1200&q=80', 'maintenance'),
+      ('Fiat', '500', 2022, 'City', 'Automatic', 'Petrol', 4, 31, 'Mitrovice', 'https://images.unsplash.com/photo-1763604993309-3806646b6885?auto=format&fit=crop&w=1200&q=80', 'available')
     ) AS v(brand, model, year, category, transmission, fuel, seats, price_per_day, location, image_url, status)
     WHERE NOT EXISTS (SELECT 1 FROM cars)
     RETURNING id, model
