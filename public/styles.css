@@ -2293,3 +2293,23 @@ body.admin-auth-mode .admin-auth-card {
   color: #9ce4d4;
   text-decoration: underline;
 }
+
+/* iPhone Safari gives date fields an intrinsic width that ignores width: 100%,
+   so they spilled out of the search and booking forms. Reset it. */
+input[type="date"] {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+}
+
+input[type="date"]::-webkit-date-and-time-value {
+  min-height: 1.2em;
+  text-align: left;
+}
+
+form label {
+  min-width: 0;
+}
