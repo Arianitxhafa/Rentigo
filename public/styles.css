@@ -2277,3 +2277,19 @@ body.admin-auth-mode .admin-auth-card {
   box-shadow: 0 6px 16px rgba(9, 14, 16, 0.22);
   backdrop-filter: blur(6px);
 }
+
+/* Portfolio credit in the footer, like CareerPilot and Faturo. */
+.site-footer .footer-credit {
+  display: inline;
+  min-height: 0;
+  color: #ffffff;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.site-footer .footer-credit:hover {
+  color: #9ce4d4;
+  text-decoration: underline;
+}

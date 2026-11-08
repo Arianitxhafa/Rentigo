@@ -47,6 +47,7 @@
     Suport: "Support",
     "Mitrovice, Kosove": "Mitrovica, Kosovo",
     "© 2026 Rentigo. Te gjitha te drejtat e rezervuara.": "© 2026 Rentigo. All rights reserved.",
+    "© 2026 Rentigo · Ndërtuar nga": "© 2026 Rentigo · Built by",
     "Siguri, transparence dhe rezervime te shpejta.": "Safety, transparency and fast bookings.",
     "Rezervime online, flote e verifikuar dhe asistence per udhetimet ne qytetet kryesore.": "Online booking, a verified fleet and assistance for trips across the main cities.",
     "24/7 asistence": "24/7 assistance",
