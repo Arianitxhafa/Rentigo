@@ -2244,3 +2244,36 @@ body.admin-auth-mode .admin-auth-card {
     padding: 14px;
   }
 }
+
+/* Cars in the same row line up: photo, title, details and price share row heights,
+   so a two-line name (e.g. "Mercedes-Benz C-Class") moves the whole row, not one card. */
+.car-grid {
+  grid-auto-rows: auto;
+}
+
+.car-card {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+.car-body {
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 12px;
+}
+
+.car-body .price-row {
+  align-self: end;
+}
+
+/* The status badge sits on the photo, so the car name gets the full width (and one line). */
+.car-card .car-title .status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  box-shadow: 0 6px 16px rgba(9, 14, 16, 0.22);
+  backdrop-filter: blur(6px);
+}
