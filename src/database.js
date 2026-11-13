@@ -99,23 +99,53 @@ const SCHEMA = [
   ON b.model = seeded.model`
 ];
 
+// Any fixed number: the advisory lock that lets only one instance at a time create the schema.
+const SETUP_LOCK = 7264031;
+
+/**
+ * Creates tables, indexes and demo data. Several cold serverless instances can start at the same moment (a page
+ * fires a few API calls at once); without the lock their DDL and the seed INSERT took table locks in opposite
+ * order and Postgres aborted one of them with "deadlock detected", which users saw as a server error.
+ */
+function setupSchema() {
+  return sql().transaction([
+    sql().query(`SELECT pg_advisory_xact_lock(${SETUP_LOCK})`),
+    ...SCHEMA.map((statement) => sql().query(statement)),
+  ]);
+}
+
 // Created once per process (or serverless instance); every query waits for it.
 let ready;
 function ensureReady() {
   if (!ready) {
-    ready = sql()
-      .transaction(SCHEMA.map((statement) => sql().query(statement)))
-      .catch((error) => {
-        ready = undefined; // retry on the next request instead of caching the failure
-        throw error;
-      });
+    ready = (async () => {
+      // Every start after the very first: the schema is already there, so one cheap read and no locks at all.
+      const [row] = await sql().query(`SELECT to_regclass('public.sessions_expires_idx') IS NOT NULL AS ready`);
+      if (!row?.ready) await setupSchema();
+    })().catch((error) => {
+      ready = undefined; // retry on the next request instead of caching the failure
+      throw error;
+    });
   }
   return ready;
 }
 
+// Deadlocks and serialization failures abort the whole statement, so running it again is safe.
+const RETRYABLE = new Set(["40P01", "40001"]);
+async function withRetry(run) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await run();
+    } catch (error) {
+      if (attempt >= 3 || !RETRYABLE.has(error?.code)) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 100 * attempt + Math.random() * 100));
+    }
+  }
+}
+
 async function query(text, params = []) {
-  await ensureReady();
-  return sql().query(text, params);
+  await withRetry(ensureReady);
+  return withRetry(() => sql().query(text, params));
 }
 
 async function one(text, params) {
@@ -467,6 +497,7 @@ async function deleteSession(token) {
 
 module.exports = {
   KOSOVO_CITIES,
+  setupSchema,
   allCars,
   getCar,
   createCar,
